@@ -4,6 +4,11 @@ import { Pressable, useColorScheme, Image } from 'react-native';
 
 import Colors from '../../../constants/Colors';
 
+export const unstable_settings = {
+	// Ensure that reloading on `/modal` keeps a back button present.
+	initialRouteName: 'two',
+};
+
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
@@ -13,7 +18,6 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 
 function AvatarHeader() {
 	const navigation = useNavigation();
-
 	return (
 		<Pressable onPress={() => navigation.openDrawer()}>
 			<Image
@@ -34,9 +38,9 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="index"
+				name="feed"
 				options={{
-					title: 'Tab One',
+					title: 'Feed',
 					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
 					headerRight: () => (
 						<Link href="/modal" asChild>
@@ -52,7 +56,7 @@ export default function TabLayout() {
 							</Pressable>
 						</Link>
 					),
-					headerLeft: () => <AvatarHeader></AvatarHeader>,
+					headerLeft: () => <AvatarHeader />,
 				}}
 			/>
 			<Tabs.Screen
