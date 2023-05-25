@@ -4,11 +4,6 @@ import { Pressable, useColorScheme, Image } from 'react-native';
 
 import Colors from '../../../constants/Colors';
 
-export const unstable_settings = {
-	// Ensure that reloading on `/modal` keeps a back button present.
-	initialRouteName: 'two',
-};
-
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
