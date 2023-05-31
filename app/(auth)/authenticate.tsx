@@ -1,13 +1,24 @@
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
+
+import { authenticate } from '../../lib/api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 const Authenticate = () => {
 	const [code, setCode] = useState('');
 	const { email } = useLocalSearchParams();
 
+	const { setAuthToken } = useAuth();
+
 	const onConfirm = async () => {
-		console.warn('Authenticate: ', email, code);
+		if (typeof email !== 'string') return;
+		try {
+			const res = await authenticate({ email, emailToken: code });
+			setAuthToken(res.authToken);
+		} catch (err) {
+			Alert.alert('Error: ', err.message);
+		}
 	};
 
 	return (
