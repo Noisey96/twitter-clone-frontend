@@ -23,10 +23,10 @@ const Tweet = ({ tweet }: TweetProps) => {
 					<Text style={styles.content}>{tweet.content}</Text>
 					{tweet.image && <Image source={{ uri: tweet.image }} style={styles.image} />}
 					<View style={styles.footer}>
-						<IconButton icon="comment" text={tweet.numberOfComments || 0} />
-						<IconButton icon="retweet" text={tweet.numberOfRetweets || 0} />
-						<IconButton icon="heart" text={tweet.numberOfLikes || 0} />
-						<IconButton icon="chart" text={tweet.impressions || 0} />
+						<IconButton icon="comment" text={tweet.numberOfComments ?? 0} />
+						<IconButton icon="retweet" text={tweet.numberOfRetweets ?? 0} />
+						<IconButton icon="heart" text={tweet.numberOfLikes ?? 0} />
+						<IconButton icon="chart" text={tweet.impressions ?? 0} />
 						<IconButton icon="share-apple" />
 					</View>
 				</View>

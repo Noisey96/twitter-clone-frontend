@@ -12,6 +12,7 @@ export const listTweets = async () => {
 };
 
 export const getTweet = async (id: string) => {
+	if (!id) throw new Error('Error');
 	const res = await fetch(`${API_URL}/tweet/${id}`, {
 		headers: {
 			Authorization: `Bearer ${authToken}`,

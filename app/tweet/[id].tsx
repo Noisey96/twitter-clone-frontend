@@ -1,4 +1,4 @@
-import { useSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, Text } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 
@@ -6,7 +6,7 @@ import Tweet from '../../components/Tweet';
 import { getTweet } from '../../lib/tweets';
 
 export default function TweetScreen() {
-	const { id } = useSearchParams();
+	const { id } = useLocalSearchParams();
 
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['tweet', id],
