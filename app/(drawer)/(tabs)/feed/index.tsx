@@ -4,9 +4,11 @@ import { Link } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 
 import Tweet from '../../../../components/Tweet';
-import { listTweets } from '../../../../lib/tweets';
+import { useTweetsApi } from '../../../../lib/api/tweets';
 
 export default function FeedScreen() {
+	const { listTweets } = useTweetsApi();
+
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['tweets'],
 		queryFn: listTweets,

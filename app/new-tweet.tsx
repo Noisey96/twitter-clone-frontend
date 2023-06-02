@@ -3,12 +3,20 @@ import { View, StyleSheet, Image, TextInput, Pressable, Text, SafeAreaView, Acti
 import { Link, useRouter } from 'expo-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createTweet } from '../lib/tweets';
+import { useTweetsApi } from '../lib/api/tweets';
+
+const user = {
+	id: 'u1',
+	username: 'VadimNotJustDev',
+	name: 'Vadim',
+	image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.png',
+};
 
 export default function NewTweet() {
 	const [text, setText] = useState('');
-
 	const router = useRouter();
+
+	const { createTweet } = useTweetsApi();
 
 	const queryClient = useQueryClient();
 	const { mutateAsync, isLoading, isError, error } = useMutation({
@@ -19,8 +27,6 @@ export default function NewTweet() {
 	});
 
 	const onTweetPress = async () => {
-		console.warn('Posting new tweet: ', text);
-
 		try {
 			await mutateAsync({ content: text });
 
@@ -44,7 +50,7 @@ export default function NewTweet() {
 					</Pressable>
 				</View>
 				<View style={styles.inputContainer}>
-					<Image source={{ uri: '' }} style={styles.image} />
+					<Image source={{ uri: user.image }} style={styles.image} />
 					<TextInput
 						value={text}
 						onChangeText={setText}
