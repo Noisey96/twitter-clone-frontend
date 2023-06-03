@@ -1,4 +1,4 @@
-import { API_URL } from './config';
+import { API_URL } from '@env';
 
 export const login = async (data: { email: string }) => {
 	const res = await fetch(`${API_URL}/auth/login`, {
