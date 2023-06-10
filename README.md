@@ -12,26 +12,27 @@ Essentially, this Twitter clone allows users to create an account or sign in via
 
 Here is a simple example of how you can use the app.
 
-1. Enter your email and click on Sign In.
+1. Enter your email and click on Sign In.  
    ![Sign in page with an email entered in](https://uploadthing.com/f/7ff90892-7160-4abc-a737-0b4dd4456a70_demo%20pt%201.jpg)
 
-2. Find the email with the single-use, six-digit code.
+2. Find the email with the single-use, six-digit code.  
    ![Email with the code](https://uploadthing.com/f/6bcef9ed-605f-4b6e-95f3-ee29c5fc18c9_demo%20pt%202.jpg)
 
-3. Enter the code and click on Confirm.
+3. Enter the code and click on Confirm.  
    ![Confirmation page with the code entered in](https://uploadthing.com/f/ef7b6937-5468-4c79-b792-932cdae5f14e_demo%20pt%203.jpg)
 
-4. At the moment, you update the user with a name and an image using a tool similar to Insomnia.
+4. At the moment, you update the user with a name and an image using a tool similar to Insomnia.  
    ![HTTP request completed by Insomnia](https://uploadthing.com/f/3584f364-b99a-4e8f-8e56-ed49572a0d91_demo%20pt%204.jpg)
 
-5. Click on the bottom right blue button with a plus.
+5. Click on the bottom right blue button with a plus.  
    ![Feed page](https://uploadthing.com/f/05345342-f26e-4b21-8c2c-a3df2d727352_demo%20pt%205.jpg)
 
-6. Enter some text for a tweet and click on Tweet.
+6. Enter some text for a tweet and click on Tweet.  
    ![New tweet page with text entered in](https://uploadthing.com/f/0c3b201c-6819-4880-a971-c1b01e7e7beb_demo%20pt%206.jpg)
 
-7. You can see your new tweet in the feed!
+7. You can see your new tweet in the feed!  
    ![Feed page with new tweet](https://uploadthing.com/f/6b578d16-be0a-4a71-b000-df8f3b87f092_demo%20pt%207.jpg)
+   <img src="https://uploadthing.com/f/6b578d16-be0a-4a71-b000-df8f3b87f092_demo%20pt%207.jpg" width=50% height=50%>
 
 ## How can I recreate this app?
 
