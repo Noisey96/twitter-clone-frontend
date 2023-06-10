@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import { View, StyleSheet, Image, TextInput, Pressable, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useTweetsApi } from '../lib/api/tweets';
-
-const user = {
-	id: 'u1',
-	username: 'VadimNotJustDev',
-	name: 'Vadim',
-	image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.png',
-};
 
 export default function NewTweet() {
 	const [text, setText] = useState('');
 	const router = useRouter();
 
-	const { createTweet } = useTweetsApi();
+	const { createTweet, getCurrentUser } = useTweetsApi();
+
+	const currentUserQuery = useQuery({
+		queryKey: ['user/myself'],
+		queryFn: getCurrentUser,
+	});
 
 	const queryClient = useQueryClient();
-	const { mutateAsync, isLoading, isError, error } = useMutation({
+	const tweetMutation = useMutation({
 		mutationFn: createTweet,
 		onSuccess: (data) => {
 			queryClient.setQueriesData(['tweets'], (existingTweets) => [data, ...existingTweets]);
@@ -28,7 +26,7 @@ export default function NewTweet() {
 
 	const onTweetPress = async () => {
 		try {
-			await mutateAsync({ content: text });
+			await tweetMutation.mutateAsync({ content: text });
 
 			setText('');
 			router.back();
@@ -44,13 +42,15 @@ export default function NewTweet() {
 					<Link href="../" style={{ fontSize: 20 }}>
 						Cancel
 					</Link>
-					{isLoading && <ActivityIndicator />}
+					{tweetMutation.isLoading && <ActivityIndicator />}
 					<Pressable onPress={onTweetPress} style={styles.button}>
 						<Text style={styles.buttonText}>Tweet</Text>
 					</Pressable>
 				</View>
 				<View style={styles.inputContainer}>
-					<Image source={{ uri: user.image }} style={styles.image} />
+					{!currentUserQuery.isLoading && !currentUserQuery.isError && (
+						<Image source={{ uri: currentUserQuery.data.image }} style={styles.image} />
+					)}
 					<TextInput
 						value={text}
 						onChangeText={setText}
@@ -60,7 +60,7 @@ export default function NewTweet() {
 						style={{ flex: 1 }}
 					/>
 				</View>
-				{isError && <Text>Error: {error.message}</Text>}
+				{tweetMutation.isError && <Text>Error: {tweetMutation.error.message}</Text>}
 			</View>
 		</SafeAreaView>
 	);

@@ -1,8 +1,10 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme, Image } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
 
 import Colors from '../../../constants/Colors';
+import { useTweetsApi } from '../../../lib/api/tweets';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -13,12 +15,22 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 
 function AvatarHeader() {
 	const navigation = useNavigation();
+
+	const { getCurrentUser } = useTweetsApi();
+
+	const currentUserQuery = useQuery({
+		queryKey: ['user/myself'],
+		queryFn: getCurrentUser,
+	});
+
 	return (
 		<Pressable onPress={() => navigation.openDrawer()}>
-			<Image
-				source={{ uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.png' }}
-				style={{ width: 30, aspectRatio: 1, borderRadius: 40, marginLeft: 10 }}
-			/>
+			{!currentUserQuery.isLoading && !currentUserQuery.isError && (
+				<Image
+					source={{ uri: currentUserQuery.data.image }}
+					style={{ width: 30, aspectRatio: 1, borderRadius: 40, marginLeft: 10 }}
+				/>
+			)}
 		</Pressable>
 	);
 }

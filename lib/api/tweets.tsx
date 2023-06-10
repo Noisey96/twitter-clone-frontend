@@ -61,8 +61,26 @@ const TweetsApiContextProvider = ({ children }: PropsWithChildren) => {
 		return await res.json();
 	};
 
+	const getCurrentUser = async () => {
+		if (!authToken) return;
+
+		const res = await fetch(`${API_URL}/user/myself`, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
+		if (res.status === 401) {
+			removeAuthToken();
+			throw new Error('Not authorized. Please sign in');
+		}
+		if (res.status !== 200) throw new Error('Error fetching current user');
+		return await res.json();
+	};
+
 	return (
-		<TweetsApiContext.Provider value={{ listTweets, getTweet, createTweet }}>{children}</TweetsApiContext.Provider>
+		<TweetsApiContext.Provider value={{ listTweets, getTweet, createTweet, getCurrentUser }}>
+			{children}
+		</TweetsApiContext.Provider>
 	);
 };
 
