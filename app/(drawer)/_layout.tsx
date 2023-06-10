@@ -1,6 +1,9 @@
 import { withLayoutContext } from 'expo-router';
 import { ActivityIndicator, Text } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer';
+import { useQuery } from '@tanstack/react-query';
+
+import { useTweetsApi } from '../../lib/api/tweets';
 import { useAuth } from '../../context/AuthContext';
 
 const DrawerNavigator = createDrawerNavigator().Navigator;
@@ -8,9 +11,18 @@ const DrawerNavigator = createDrawerNavigator().Navigator;
 const Drawer = withLayoutContext(DrawerNavigator);
 
 function CustomDrawerContent(props) {
+	const { getCurrentUser } = useTweetsApi();
+
+	const currentUserQuery = useQuery({
+		queryKey: ['user/myself'],
+		queryFn: getCurrentUser,
+	});
+
 	return (
 		<DrawerContentScrollView {...props}>
-			<Text style={{ alignSelf: 'center', fontSize: 20 }}>Vadim</Text>
+			{!currentUserQuery.isLoading && !currentUserQuery.isError && (
+				<Text style={{ alignSelf: 'center', fontSize: 20 }}>{currentUserQuery.data.name}</Text>
+			)}
 			<DrawerItemList {...props} />
 		</DrawerContentScrollView>
 	);

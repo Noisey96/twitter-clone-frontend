@@ -2,8 +2,8 @@
 	"name": "twitter-clone-frontend",
 	"version": "0.1.0",
 	"scripts": {
-		"dev": "dotenv -e .env.development -- expo start --clear",
-		"prd": "dotenv -e .env.production -- expo start --clear",
+		"dev": "expo start --clear",
+		"prd": "expo start --clear",
 		"android": "expo start --android",
 		"ios": "expo start --ios",
 		"web": "expo start --web",
