@@ -31,8 +31,7 @@ Here is a simple example of how you can use the app.
    ![New tweet page with text entered in](https://uploadthing.com/f/0c3b201c-6819-4880-a971-c1b01e7e7beb_demo%20pt%206.jpg)
 
 7. You can see your new tweet in the feed!  
-   ![Feed page with new tweet](https://uploadthing.com/f/6b578d16-be0a-4a71-b000-df8f3b87f092_demo%20pt%207.jpg)
-   <img src="https://uploadthing.com/f/6b578d16-be0a-4a71-b000-df8f3b87f092_demo%20pt%207.jpg" width=50% height=50%>
+   <img src="https://uploadthing.com/f/6b578d16-be0a-4a71-b000-df8f3b87f092_demo%20pt%207.jpg" width=25% height=25%>
 
 ## How can I recreate this app?
 
