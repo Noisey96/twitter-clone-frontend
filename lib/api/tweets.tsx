@@ -11,7 +11,7 @@ const TweetsApiContextProvider = ({ children }: PropsWithChildren) => {
 	const listTweets = async () => {
 		if (!authToken) return;
 
-		const res = await fetch(`${API_URL}/tweet`, {
+		const res = await fetch(`${API_URL}/tweet/`, {
 			headers: {
 				Authorization: `Bearer ${authToken}`,
 			},
@@ -45,7 +45,7 @@ const TweetsApiContextProvider = ({ children }: PropsWithChildren) => {
 	const createTweet = async (data: { content: string }) => {
 		if (!authToken) return;
 
-		const res = await fetch(`${API_URL}/tweet`, {
+		const res = await fetch(`${API_URL}/tweet/`, {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${authToken}`,
