@@ -1,11 +1,13 @@
+import { STORAGE_ENCRYPTION_KEY } from '@env';
 import { useRouter, useSegments } from 'expo-router';
-import { PropsWithChildren, createContext, useState, useContext, useEffect } from 'react';
-import * as SecureStore from 'expo-secure-store';
+import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
+import { MMKV, useMMKVString } from 'react-native-mmkv';
 
 const AuthContext = createContext({});
+const storage = new MMKV({ id: 'global', encryptionKey: STORAGE_ENCRYPTION_KEY });
 
 const AuthContextProvider = ({ children }: PropsWithChildren) => {
-	const [authToken, setAuthToken] = useState<string | null>(null);
+	const [authToken, setAuthToken] = useMMKVString('authToken', storage);
 	const segments = useSegments();
 	const router = useRouter();
 
@@ -16,22 +18,12 @@ const AuthContextProvider = ({ children }: PropsWithChildren) => {
 		if (authToken && isAuthGroup) router.replace('/');
 	}, [authToken, segments]);
 
-	useEffect(() => {
-		const loadAuthToken = async () => {
-			const res = await SecureStore.getItemAsync('authToken');
-			if (res) setAuthToken(res);
-		};
-		loadAuthToken();
-	}, []);
-
 	const updateAuthToken = async (newToken: string) => {
-		await SecureStore.setItemAsync('authToken', newToken);
 		setAuthToken(newToken);
 	};
 
 	const removeAuthToken = async () => {
-		await SecureStore.deleteItemAsync('authToken');
-		setAuthToken(null);
+		setAuthToken(undefined);
 	};
 
 	return (

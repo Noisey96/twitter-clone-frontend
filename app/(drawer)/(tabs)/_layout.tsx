@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs, useNavigation } from 'expo-router';
+import { Tabs, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme, Image } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 
@@ -49,28 +49,7 @@ export default function TabLayout() {
 				options={{
 					title: 'Feed',
 					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-					headerRight: () => (
-						<Link href="/modal" asChild>
-							<Pressable>
-								{({ pressed }) => (
-									<FontAwesome
-										name="info-circle"
-										size={25}
-										color={Colors[colorScheme ?? 'light'].text}
-										style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-									/>
-								)}
-							</Pressable>
-						</Link>
-					),
 					headerLeft: () => <AvatarHeader />,
-				}}
-			/>
-			<Tabs.Screen
-				name="two"
-				options={{
-					title: 'Tab Two',
-					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
 				}}
 			/>
 		</Tabs>

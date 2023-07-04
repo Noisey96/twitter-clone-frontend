@@ -36,8 +36,6 @@ export default function DrawerLayout() {
 	return (
 		<Drawer drawerContent={(props) => <CustomDrawerContent {...props} />}>
 			<Drawer.Screen name="(tabs)" options={{ headerShown: false, title: 'Home' }} />
-			<Drawer.Screen name="bookmarks" options={{ title: 'Bookmarks' }} />
-			<Drawer.Screen name="twitter-blue" options={{ title: 'Twitter Blue' }} />
 		</Drawer>
 	);
 }
