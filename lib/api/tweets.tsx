@@ -77,8 +77,25 @@ const TweetsApiContextProvider = ({ children }: PropsWithChildren) => {
 		return await res.json();
 	};
 
+	const getUser = async (id: string) => {
+		if (!authToken) return;
+
+		if (!id) throw new Error('Error');
+		const res = await fetch(`${API_URL}/user/${id}`, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
+		if (res.status === 401) {
+			removeAuthToken();
+			throw new Error('Not authorized. Please sign in');
+		}
+		if (res.status !== 200) throw new Error('Error fetching tweet');
+		return await res.json();
+	};
+
 	return (
-		<TweetsApiContext.Provider value={{ listTweets, getTweet, createTweet, getCurrentUser }}>
+		<TweetsApiContext.Provider value={{ listTweets, getTweet, createTweet, getCurrentUser, getUser }}>
 			{children}
 		</TweetsApiContext.Provider>
 	);
