@@ -1,14 +1,16 @@
-import { View, Text } from '@/components/Themed';
 import { TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 
-export const SignIn = () => {
+import { View, Text } from '@/components/Themed';
+import { login } from '@/lib/api/auth';
+
+export const Login = () => {
 	const [email, setEmail] = useState('');
 
-	const onSignIn = async () => {
+	const onLogin = async () => {
 		try {
-			// signin
+			await login({ email });
 			// router
 		} catch (err) {
 			Alert.alert('Error: ', err.message);
@@ -17,10 +19,10 @@ export const SignIn = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.label}>Sign In or Create an Account</Text>
+			<Text style={styles.label}>Login or Create an Account</Text>
 			<TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
-			<Pressable style={styles.button} onPress={onSignIn}>
-				<Text style={styles.buttonText}>Sign In</Text>
+			<Pressable style={styles.button} onPress={onLogin}>
+				<Text style={styles.buttonText}>Login</Text>
 			</Pressable>
 		</View>
 	);

@@ -21,7 +21,7 @@ function useProtectedRoute(authToken: string | null) {
 		const inAuthGroup = segments[0] === 'auth';
 
 		if (!authToken && !inAuthGroup) {
-			router.replace('/signin');
+			router.replace('/login');
 		} else if (authToken && inAuthGroup) {
 			router.replace('/');
 		}
