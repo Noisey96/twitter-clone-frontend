@@ -2,7 +2,7 @@ import { router, useSegments } from 'expo-router';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
 
-import { AuthContextProps } from '@/types';
+import { AuthContextProps } from '@/src/types';
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 

@@ -2,8 +2,9 @@ import { TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 
-import { View, Text } from '@/components/Themed';
-import { login } from '@/lib/api/auth';
+import { View, Text } from '@/src/components/Themed';
+import { login } from '@/src/lib/api/auth';
+import { getErrorMessage } from '@/src/utilities';
 
 export const Login = () => {
 	const [email, setEmail] = useState('');
@@ -11,9 +12,10 @@ export const Login = () => {
 	const onLogin = async () => {
 		try {
 			await login({ email });
-			// router
+			router.push({ pathname: '/authenticate', params: { email } });
 		} catch (err) {
-			Alert.alert('Error: ', err.message);
+			const message = getErrorMessage(err);
+			Alert.alert('Error: ', message);
 		}
 	};
 

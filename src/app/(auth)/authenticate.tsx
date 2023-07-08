@@ -2,23 +2,25 @@ import { TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 
-import { View, Text } from '@/components/Themed';
-import { useAuth } from '@/context/auth';
-import { authenticate } from '@/lib/api/auth';
-import { AuthContextProps } from '@/types';
+import { View, Text } from '@/src/components/Themed';
+import { useAuth } from '@/src/context/auth';
+import { authenticate } from '@/src/lib/api/auth';
+import { AuthContextProps } from '@/src/types';
+import { getErrorMessage } from '@/src/utilities';
 
 export const Authenticate = () => {
 	const [emailToken, setEmailToken] = useState('');
-	const { email } = useLocalSearchParams();
-
+	const { email } = useLocalSearchParams<{ email: string }>();
 	const { updateAuthToken } = useAuth() as AuthContextProps;
 
 	const onAuthenticate = async () => {
+		if (typeof email !== 'string') return;
 		try {
 			const newToken = await authenticate({ email, emailToken });
 			updateAuthToken(newToken);
 		} catch (err) {
-			Alert.alert('Error: ', err.message);
+			const message = getErrorMessage(err);
+			Alert.alert('Error: ', message);
 		}
 	};
 
