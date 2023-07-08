@@ -10,7 +10,7 @@ export const Authenticate = () => {
 	const [emailToken, setEmailToken] = useState('');
 	const { email } = useLocalSearchParams();
 
-	const { updateAuthToken } = useAuth();
+	const { updateAuthToken = null } = useAuth();
 
 	const onAuthenticate = async () => {
 		try {
