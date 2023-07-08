@@ -5,12 +5,13 @@ import { useLocalSearchParams } from 'expo-router';
 import { View, Text } from '@/components/Themed';
 import { useAuth } from '@/context/auth';
 import { authenticate } from '@/lib/api/auth';
+import { AuthContextProps } from '@/types';
 
 export const Authenticate = () => {
 	const [emailToken, setEmailToken] = useState('');
 	const { email } = useLocalSearchParams();
 
-	const { updateAuthToken = null } = useAuth();
+	const { updateAuthToken } = useAuth() as AuthContextProps;
 
 	const onAuthenticate = async () => {
 		try {

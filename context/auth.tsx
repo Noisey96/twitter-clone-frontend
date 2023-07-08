@@ -2,11 +2,7 @@ import { router, useSegments } from 'expo-router';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
 
-type AuthContextProps = {
-	authToken: string | null;
-	updateAuthToken: (newToken: string) => Promise<void>;
-	removeAuthToken: () => Promise<void>;
-};
+import { AuthContextProps } from '@/types';
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 
