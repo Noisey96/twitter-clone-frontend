@@ -1,5 +1,5 @@
 export const login = async (data: { email: string }) => {
-	const res = await fetch(`${EXPO_PUBLIC_API_URL}/auth/login`, {
+	const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-type': 'Application/json',
@@ -10,7 +10,7 @@ export const login = async (data: { email: string }) => {
 };
 
 export const authenticate = async (data: { email: string; emailToken: string }) => {
-	const res = await fetch(`${EXPO_PUBLIC_API_URL}/auth/authenticate`, {
+	const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/authenticate`, {
 		method: 'POST',
 		headers: {
 			'Content-type': 'Application/json',
