@@ -1,16 +1,17 @@
 export default {
 	light: {
-		text: '#000',
-		background: '#fff',
-		tint: '#2f95dc',
-		tabIconDefault: '#ccc',
-		tabIconSelected: '#2f95dc',
+	  primary: '#307f91',
+	  secondary: '#d7d5d5',
+	  background: '#fdfdfd',
+	  text: '#020202',
 	},
 	dark: {
-		text: '#fff',
-		background: '#000',
-		tint: '#fff',
-		tabIconDefault: '#ccc',
-		tabIconSelected: '#fff',
-	},
+	  primary: '#307f91',
+	  secondary: '#282a2a',
+	  background: '#020202',
+	  text: '#fdfdfd',
+	}
 };
+
+
+
