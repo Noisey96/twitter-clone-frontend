@@ -25,9 +25,9 @@ export default function Authenticate() {
 	};
 
 	return (
-		<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+		<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<BackgroundView style={{ flex: 1 }}>
+				<BackgroundView style={styles.container}>
 					<BackgroundView style={styles.header}>
 						<PrimaryText style={styles.title}>TwitterClone</PrimaryText>
 					</BackgroundView>
@@ -50,6 +50,9 @@ export default function Authenticate() {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
 	header: {
 		flex: 1,
 		alignItems: 'center',
