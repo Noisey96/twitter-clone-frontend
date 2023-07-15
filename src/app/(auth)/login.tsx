@@ -1,12 +1,12 @@
-import { TextInput, Pressable, StyleSheet, Alert } from 'react-native';
+import { Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 
-import { View, Text } from '@/src/components/Themed';
+import { BackgroundView, PrimaryButton, PrimaryText, Text, TextInput } from '@/src/components/Themed';
 import { login } from '@/src/lib/api/auth';
 import { getErrorMessage } from '@/src/utilities';
 
-export const Login = () => {
+export default function Login() {
 	const [email, setEmail] = useState('');
 
 	const onLogin = async () => {
@@ -20,19 +20,36 @@ export const Login = () => {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.label}>Login or Create an Account</Text>
-			<TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
-			<Pressable style={styles.button} onPress={onLogin}>
-				<Text style={styles.buttonText}>Login</Text>
-			</Pressable>
-		</View>
+		<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<BackgroundView style={{ flex: 1 }}>
+					<BackgroundView style={styles.header}>
+						<PrimaryText style={styles.title}>TwitterClone</PrimaryText>
+					</BackgroundView>
+					<BackgroundView style={styles.body}>
+						<Text style={styles.label}>Login or Create an Account</Text>
+						<TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+						<PrimaryButton style={styles.button} onPress={onLogin}>
+							<Text style={styles.buttonText}>Login</Text>
+						</PrimaryButton>
+					</BackgroundView>
+				</BackgroundView>
+			</TouchableWithoutFeedback>
+		</KeyboardAvoidingView>
 	);
-};
+}
 
 const styles = StyleSheet.create({
-	container: {
+	header: {
 		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	title: {
+		fontSize: 36,
+	},
+	body: {
+		flex: 2,
 		justifyContent: 'center',
 		padding: 24,
 	},
