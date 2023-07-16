@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { Text, BackgroundView } from '@/src/components/Themed';
 
-export default function Feed() {
+export default function FeedScreen() {
 	return (
 		<BackgroundView style={styles.container}>
 			<Text>Test</Text>

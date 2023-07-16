@@ -5,7 +5,7 @@ import { useAuth } from '@/src/context/auth';
 import { AuthContextProps } from '@/src/types';
 import { useEffect } from 'react';
 
-export default function Profile() {
+export default function ProfileScreen() {
 	const { removeAuthToken } = useAuth() as AuthContextProps;
 
 	useEffect(() => {

@@ -6,13 +6,14 @@ import { BackgroundView, PrimaryButton, PrimaryText, Text, TextInput } from '@/s
 import { login } from '@/src/lib/api/auth';
 import { getErrorMessage } from '@/src/utilities';
 
-export default function Login() {
+export default function LoginScreen() {
 	const [email, setEmail] = useState('');
 
 	const onLogin = async () => {
 		try {
-			await login({ email });
-			router.push({ pathname: '/authenticate', params: { email } });
+			const res = await login({ email });
+			if (res.found) router.push({ pathname: '/authenticate', params: { email } });
+			else router.push({ pathname: '/register', params: { email } });
 		} catch (err) {
 			const message = getErrorMessage(err);
 			Alert.alert('Error: ', message);

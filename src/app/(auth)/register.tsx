@@ -1,23 +1,19 @@
 import { Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 
 import { BackgroundView, PrimaryButton, PrimaryText, Text, TextInput } from '@/src/components/Themed';
-import { useAuth } from '@/src/context/auth';
-import { authenticate } from '@/src/lib/api/auth';
-import { AuthContextProps } from '@/src/types';
+import { register } from '@/src/lib/api/auth';
 import { getErrorMessage } from '@/src/utilities';
 
-export default function AuthenticateScreen() {
+export default function RegisterScreen() {
 	const { email } = useLocalSearchParams<{ email: string }>();
-	const [emailToken, setEmailToken] = useState('');
-	const { updateAuthToken } = useAuth() as AuthContextProps;
+	const [username, setUsername] = useState('');
 
-	const onAuthenticate = async () => {
-		if (typeof email !== 'string') return;
+	const onRegister = async () => {
 		try {
-			const res = await authenticate({ email, emailToken });
-			await updateAuthToken(res.authToken);
+			await register({ email, username });
+			router.push({ pathname: '/authenticate', params: { email } });
 		} catch (err) {
 			const message = getErrorMessage(err);
 			Alert.alert('Error: ', message);
@@ -32,15 +28,15 @@ export default function AuthenticateScreen() {
 						<PrimaryText style={styles.title}>TwitterClone</PrimaryText>
 					</BackgroundView>
 					<BackgroundView style={styles.body}>
-						<Text style={styles.label}>Confirm your email address</Text>
+						<Text style={styles.label}>Enter Your Username</Text>
 						<TextInput
 							style={styles.input}
-							placeholder="Email Code"
-							value={emailToken}
-							onChangeText={setEmailToken}
+							placeholder="Username"
+							value={username}
+							onChangeText={setUsername}
 						/>
-						<PrimaryButton style={styles.button} onPress={onAuthenticate}>
-							<Text style={styles.buttonText}>Confirm</Text>
+						<PrimaryButton style={styles.button} onPress={onRegister}>
+							<Text style={styles.buttonText}>Register</Text>
 						</PrimaryButton>
 					</BackgroundView>
 				</BackgroundView>
